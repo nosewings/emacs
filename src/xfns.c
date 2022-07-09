@@ -7228,8 +7228,6 @@ x_display_info_for_name (Lisp_Object name)
   if (dpyinfo == 0)
     error ("Cannot connect to X server %s", SDATA (name));
 
-  XSETFASTINT (Vwindow_system_version, 11);
-
   return dpyinfo;
 }
 
@@ -7273,7 +7271,6 @@ An insecure way to solve the problem may be to use `xhost'.\n",
 	error ("Cannot connect to X server %s", SDATA (display));
     }
 
-  XSETFASTINT (Vwindow_system_version, 11);
   return Qnil;
 }
 
