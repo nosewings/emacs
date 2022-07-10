@@ -1768,6 +1768,8 @@ The value returned is the value of the last form in BODY."
        (save-window-excursion
          ;; Analogous to `dired-pop-to-buffer'
          ;; Don't split window horizontally.  (Bug#1806)
+         ;; FIXME: `dired-pop-to-buffer' was removed.  Should we just
+         ;;        use `pop-to-buffer' here also?
          (display-buffer (current-buffer)
                          '(display-buffer-in-direction
                            (direction . bottom)

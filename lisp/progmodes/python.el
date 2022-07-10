@@ -487,16 +487,6 @@ The type returned can be `comment', `string' or `paren'."
   (eql (syntax-class (syntax-after (point)))
        (syntax-class (string-to-syntax ")"))))
 
-(define-obsolete-function-alias
-  'python-info-ppss-context #'python-syntax-context "24.3")
-
-(define-obsolete-function-alias
-  'python-info-ppss-context-type #'python-syntax-context-type "24.3")
-
-(define-obsolete-function-alias
-  'python-info-ppss-comment-or-string-p
-  #'python-syntax-comment-or-string-p "24.3")
-
 (defun python-font-lock-syntactic-face-function (state)
   "Return syntactic face given STATE."
   (if (nth 3 state)
@@ -888,16 +878,10 @@ It makes underscores and dots word constituent chars.")
 
 ;;; Indentation
 
-(define-obsolete-variable-alias
-  'python-indent 'python-indent-offset "24.3")
-
 (defcustom python-indent-offset 4
   "Default indentation offset for Python."
   :type 'integer
   :safe 'integerp)
-
-(define-obsolete-variable-alias
-  'python-guess-indent 'python-indent-guess-indent-offset "24.3")
 
 (defcustom python-indent-guess-indent-offset t
   "Non-nil tells Python mode to guess `python-indent-offset' value."
@@ -3205,16 +3189,10 @@ be asked for their values."
  "Instead call `python-shell-get-process' and create one if returns nil."
  "25.1")
 
-(define-obsolete-variable-alias
-  'python-buffer 'python-shell-internal-buffer "24.3")
-
 (defvar python-shell-internal-buffer nil
   "Current internal shell buffer for the current buffer.
 This is really not necessary at all for the code to work but it's
 there for compatibility with CEDET.")
-
-(define-obsolete-variable-alias
-  'python-preoutput-result 'python-shell-internal-last-output "24.3")
 
 (defvar python-shell-internal-last-output nil
   "Last output captured by the internal shell.
@@ -3227,9 +3205,6 @@ there for compatibility with CEDET.")
     (if (process-live-p proc-name)
         (get-process proc-name)
       (run-python-internal))))
-
-(define-obsolete-function-alias
-  'python-proc #'python-shell-internal-get-or-create-process "24.3")
 
 (defun python-shell--save-temp-file (string)
   (let* ((temporary-file-directory
@@ -3346,12 +3321,6 @@ Returns the output.  See `python-shell-send-string-no-output'."
          ;; python-send-receive. (At least for CEDET).
          (replace-regexp-in-string "_emacs_out +" "" string)
          (python-shell-internal-get-or-create-process))))
-
-(define-obsolete-function-alias
-  'python-send-receive #'python-shell-internal-send-string "24.3")
-
-(define-obsolete-function-alias
-  'python-send-string #'python-shell-internal-send-string "24.3")
 
 (defun python-shell-buffer-substring (start end &optional nomain no-cookie)
   "Send buffer substring from START to END formatted for shell.
@@ -4517,9 +4486,6 @@ JUSTIFY should be used (if applicable) as in `fill-paragraph'."
 
 
 ;;; Skeletons
-
-(define-obsolete-variable-alias
-  'python-use-skeletons 'python-skeleton-autoinsert "24.3")
 
 (defcustom python-skeleton-autoinsert nil
   "Non-nil means template skeletons will be automagically inserted.
