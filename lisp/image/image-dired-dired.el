@@ -33,7 +33,7 @@ If no marked file could be found, insert or hide thumbnails on the
 current line.  ARG, if non-nil, specifies the files to use instead
 of the marked files.  If ARG is an integer, use the next ARG (or
 previous -ARG, if ARG<0) files."
-  (interactive "P")
+  (interactive "P" dired-mode)
   (dired-map-over-marks
    (let ((image-pos  (dired-move-to-filename))
          (image-file (dired-get-filename nil t))
@@ -73,7 +73,7 @@ Otherwise, delete overlays."
 
 (defun image-dired-next-line-and-display ()
   "Move to next Dired line and display thumbnail image."
-  (interactive)
+  (interactive nil dired-mode)
   (dired-next-line 1)
   (image-dired-display-thumbs
    t (or image-dired-append-when-browsing nil) t)
@@ -82,7 +82,7 @@ Otherwise, delete overlays."
 
 (defun image-dired-previous-line-and-display ()
   "Move to previous Dired line and display thumbnail image."
-  (interactive)
+  (interactive nil dired-mode)
   (dired-previous-line 1)
   (image-dired-display-thumbs
    t (or image-dired-append-when-browsing nil) t)
@@ -91,7 +91,7 @@ Otherwise, delete overlays."
 
 (defun image-dired-toggle-append-browsing ()
   "Toggle `image-dired-append-when-browsing'."
-  (interactive)
+  (interactive nil dired-mode)
   (setq image-dired-append-when-browsing
         (not image-dired-append-when-browsing))
   (message "Append browsing %s"
@@ -101,7 +101,7 @@ Otherwise, delete overlays."
 
 (defun image-dired-mark-and-display-next ()
   "Mark current file in Dired and display next thumbnail image."
-  (interactive)
+  (interactive nil dired-mode)
   (dired-mark 1)
   (image-dired-display-thumbs
    t (or image-dired-append-when-browsing nil) t)
@@ -110,7 +110,7 @@ Otherwise, delete overlays."
 
 (defun image-dired-toggle-dired-display-properties ()
   "Toggle `image-dired-dired-disp-props'."
-  (interactive)
+  (interactive nil dired-mode)
   (setq image-dired-dired-disp-props
         (not image-dired-dired-disp-props))
   (message "Dired display properties %s"
@@ -144,7 +144,7 @@ but the other way around."
   "Call `dired-next-line', then track thumbnail.
 This can safely replace `dired-next-line'.
 With prefix argument, move ARG lines."
-  (interactive "P")
+  (interactive "P" dired-mode)
   (dired-next-line (or arg 1))
   (if image-dired-track-movement
       (image-dired-track-thumbnail)))
@@ -153,16 +153,15 @@ With prefix argument, move ARG lines."
   "Call `dired-previous-line', then track thumbnail.
 This can safely replace `dired-previous-line'.
 With prefix argument, move ARG lines."
-  (interactive "P")
+  (interactive "P" dired-mode)
   (dired-previous-line (or arg 1))
   (if image-dired-track-movement
       (image-dired-track-thumbnail)))
 
-
 ;;;###autoload
 (defun image-dired-jump-thumbnail-buffer ()
   "Jump to thumbnail buffer."
-  (interactive)
+  (interactive nil dired-mode)
   (let ((window (image-dired-thumbnail-window))
         frame)
     (if window
@@ -239,7 +238,7 @@ Note that n, p and <down> and <up> will be hijacked and bound to
   "Create thumbnail images for all marked files in Dired.
 With prefix argument ARG, create thumbnails even if they already exist
 \(i.e. use this to refresh your thumbnails)."
-  (interactive "P")
+  (interactive "P" dired-mode)
   (let (thumb-name)
     (dolist (curr-file (dired-get-marked-files))
       (setq thumb-name (image-dired-thumb-name curr-file))
@@ -255,7 +254,7 @@ With prefix argument ARG, create thumbnails even if they already exist
 ;;;###autoload
 (defun image-dired-dired-display-external ()
   "Display file at point using an external viewer."
-  (interactive)
+  (interactive nil dired-mode)
   (let ((file (dired-get-filename)))
     (start-process "image-dired-external" nil
                    image-dired-external-viewer file)))
@@ -264,7 +263,7 @@ With prefix argument ARG, create thumbnails even if they already exist
 (defun image-dired-dired-display-image ()
   "Display current image file.
 See documentation for `image-dired-display-image' for more information."
-  (interactive "P")
+  (interactive "P" dired-mode)
   (image-dired-display-image (dired-get-filename)))
 
 ;;;###autoload
@@ -275,7 +274,7 @@ image file and stored in image-dired's database file.  This command
 lets you input a regexp and this will be matched against all tags
 on all image files in the database file.  The files that have a
 matching tag will be marked in the Dired buffer."
-  (interactive "sMark tagged files (regexp): ")
+  (interactive "sMark tagged files (regexp): " dired-mode)
   (image-dired-sane-db-file)
   (let ((hits 0)
         files)
@@ -306,7 +305,7 @@ matching tag will be marked in the Dired buffer."
 
 (defun image-dired-dired-display-properties ()
   "Display properties for Dired file in the echo area."
-  (interactive)
+  (interactive nil dired-mode)
   (let* ((file (dired-get-filename))
          (file-name (file-name-nondirectory file))
          (dired-buf (buffer-name (current-buffer)))
