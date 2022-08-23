@@ -61,7 +61,8 @@ previous -ARG, if ARG<0) files."
 (defun image-dired-dired-after-readin-hook ()
   "Relocate existing thumbnail overlays in Dired buffer after reverting.
 Move them to their corresponding files if they still exist.
-Otherwise, delete overlays."
+Otherwise, delete overlays.
+Used by `image-dired-dired-toggle-marked-thumbs'."
   (mapc (lambda (overlay)
           (when (overlay-get overlay 'put-image)
             (let* ((image-file (overlay-get overlay 'image-file))

@@ -104,9 +104,8 @@ See also `image-dired-thumbnail-storage'."
 
 (defun image-dired-file-name-at-point ()
   "Get abbreviated file name for thumbnail or display image at point."
-  (let ((f (image-dired-original-file-name)))
-    (when f
-      (abbreviate-file-name f))))
+  (when-let ((f (image-dired-original-file-name)))
+    (abbreviate-file-name f)))
 
 (defun image-dired-associated-dired-buffer ()
   "Get associated Dired buffer at point."
@@ -121,7 +120,8 @@ See also `image-dired-thumbnail-storage'."
 
 (defun image-dired-window-width-pixels (window)
   "Calculate WINDOW width in pixels."
-    (* (window-width window) (frame-char-width)))
+  (declare (obsolete window-body-width "29.1"))
+  (* (window-width window) (frame-char-width)))
 
 (defun image-dired-display-window ()
   "Return window where `image-dired-display-image-buffer' is visible."
