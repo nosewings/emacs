@@ -277,8 +277,8 @@ the window containing the thumbnail buffer, Fixed means to use
 and No line-up means that no automatic line-up will be done."
   :type '(choice :tag "Default line-up method"
                  (const :tag "Dynamic" dynamic)
-		 (const :tag "Fixed" fixed)
-		 (const :tag "Interactive" interactive)
+                 (const :tag "Fixed" fixed)
+                 (const :tag "Interactive" interactive)
                  (const :tag "No line-up" none)))
 
 (defcustom image-dired-thumbs-per-row 3
@@ -375,16 +375,16 @@ This affects the following commands:
   (unless (string-match-p (image-file-name-regexp) file)
     (error "%s is not a valid image file" file))
   (let* ((thumb-file (image-dired-thumb-name file))
-	 (thumb-attr (file-attributes thumb-file)))
+         (thumb-attr (file-attributes thumb-file)))
     (when (or (not thumb-attr)
-	      (time-less-p (file-attribute-modification-time thumb-attr)
-			   (file-attribute-modification-time
-			    (file-attributes file))))
+              (time-less-p (file-attribute-modification-time thumb-attr)
+                           (file-attribute-modification-time
+                            (file-attributes file))))
       (image-dired-create-thumb file thumb-file))
     (create-image thumb-file)))
 
-(defun image-dired-insert-thumbnail (file original-file-name
-                                     associated-dired-buffer)
+(defun image-dired-insert-thumbnail ( file original-file-name
+                                      associated-dired-buffer)
   "Insert thumbnail image FILE.
 Add text properties ORIGINAL-FILE-NAME and ASSOCIATED-DIRED-BUFFER."
   (let (beg end)
@@ -1092,7 +1092,7 @@ See also `image-dired-line-up-dynamic'."
           (insert (propertize " " 'display `(space :align-to ,thumb-prev-pos)))
           (cl-incf seen)
           (when (and (= seen (- image-dired-thumbs-per-row 1))
-		     (not (eobp)))
+                     (not (eobp)))
             (forward-char)
             (insert "\n")
             (setq seen 0)
@@ -1104,13 +1104,13 @@ See also `image-dired-line-up-dynamic'."
 Calculate how many thumbnails fit."
   (interactive)
   (let* ((char-width (frame-char-width))
-        (width (image-dired-window-width-pixels (image-dired-thumbnail-window)))
-        (image-dired-thumbs-per-row
-         (/ width
-            (+ (* 2 image-dired-thumb-relief)
-               (* 2 image-dired-thumb-margin)
-               (image-dired-thumb-size 'width)
-               char-width))))
+         (width (image-dired-window-width-pixels (image-dired-thumbnail-window)))
+         (image-dired-thumbs-per-row
+          (/ width
+             (+ (* 2 image-dired-thumb-relief)
+                (* 2 image-dired-thumb-margin)
+                (image-dired-thumb-size 'width)
+                char-width))))
     (image-dired-line-up)))
 
 (defun image-dired-line-up-interactive ()
@@ -1226,7 +1226,7 @@ non-nil."
   (let ((file (image-dired-original-file-name)))
     (when file
       (if image-dired-track-movement
-	  (image-dired-track-original-file))
+          (image-dired-track-original-file))
       (image-dired-display-image file))))
 
 (defun image-dired-mouse-select-thumbnail (event)
@@ -1427,7 +1427,7 @@ completely fit)."
   "Calculate WINDOW height in pixels."
   (declare (obsolete nil "29.1"))
   ;; Note: The mode-line consumes one line
-    (* (- (window-height window) 1) (frame-char-height)))
+  (* (- (window-height window) 1) (frame-char-height)))
 
 (defcustom image-dired-cmd-read-exif-data-program "exiftool"
   "Program used to read EXIF data to image.
@@ -1531,7 +1531,7 @@ Dired."
         (dired-buf (image-dired-associated-dired-buffer)))
     (if (not (and dired-buf file-name))
         (message "No image, or image with correct properties, at point")
-    (with-current-buffer dired-buf
+      (with-current-buffer dired-buf
         (message "%s" file-name)
         (when (dired-goto-file file-name)
           (cond ((eq command 'mark) (dired-mark 1))
