@@ -154,4 +154,8 @@ See also `image-dired-thumbnail-storage'."
 
 (provide 'image-dired-util)
 
+;; Local Variables:
+;; nameless-current-name: "image-dired"
+;; End:
+
 ;;; image-dired-util.el ends here

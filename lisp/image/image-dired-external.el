@@ -506,4 +506,8 @@ function.  The result is a couple of new files in
 
 (provide 'image-dired-external)
 
+;; Local Variables:
+;; nameless-current-name: "image-dired"
+;; End:
+
 ;;; image-dired-external.el ends here
